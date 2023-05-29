@@ -57,6 +57,7 @@
                     android:layout_marginTop="@dimen/_14ssp" />
 
                 <EditText
+                    android:id="@+id/login_username"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_50sdp"
                     android:hint="@string/type_username"
@@ -77,14 +78,14 @@
                     android:layout_height="match_parent">
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/button"
-                        android:background="@drawable/button_login"
+                        android:id="@+id/login_button"
                         android:layout_width="@dimen/_100sdp"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:layout_marginTop="@dimen/_18sdp"
                         android:layout_centerInParent="true"
-                        android:text="@string/login" />
+                        android:layout_marginTop="@dimen/_18sdp"
+                        android:background="@drawable/button_login"
+                        android:text="@string/login"
+                        android:textColor="@color/white" />
                 </RelativeLayout>
 
                 <androidx.appcompat.widget.AppCompatTextView

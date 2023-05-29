@@ -74,7 +74,7 @@ public abstract class NetworkCallback<T> implements Callback<T> {
             failureResponse.setErrorMessage(errorBody.message());
             return failureResponse;
         }
-        else if(errorBody.code()==400){
+        else if(errorBody.code()==400 || errorBody.code()==401 ){
             FailureResponse failureResponse1 = null ;
             try{
                 failureResponse1 = new Gson().fromJson(errorBody.errorBody().string(),FailureResponse.class);

@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -51,14 +52,16 @@ public class RegisterActivity extends BaseActivity {
             registerViewModel.liveDataRegisterApi().observe(this, new Observer<RegisterResponse>() {
                 @Override
                 public void onChanged(RegisterResponse registerResponse) {
-                    Log.d("rrrr",registerResponse.getUsername());
+                    if(registerResponse.getUsername()!=null){
+                        Toast.makeText(getApplicationContext(),"Registration successfull please login",Toast.LENGTH_LONG).show();
+                        finish();
+                    }
                 }
             });
     }
 
     @Override
     protected void onFailure(FailureResponse failureResponse){
-        Log.d("ppppp",failureResponse.getErrorMessage());
         Toast.makeText(this,failureResponse.getErrorMessage(),Toast.LENGTH_LONG).show();
     }
 }

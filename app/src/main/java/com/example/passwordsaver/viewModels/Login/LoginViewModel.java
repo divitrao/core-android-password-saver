@@ -46,7 +46,7 @@ public class LoginViewModel extends BaseViewModel {
 
 
 
-    public  RichMediatorLiveData<LoginResponse> liveDataLoginApi(LoginResponse loginResponse){
+    public  RichMediatorLiveData<LoginResponse> liveDataLoginApi(){
         return loginResponseRichMediatorLiveData;
     }
 

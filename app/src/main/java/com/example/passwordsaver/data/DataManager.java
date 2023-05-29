@@ -10,6 +10,7 @@ import com.example.passwordsaver.apiRequest.RegisterRequest;
 import com.example.passwordsaver.apiResponse.LoginResponse;
 import com.example.passwordsaver.apiResponse.RegisterResponse;
 import com.example.passwordsaver.base.RichMediatorLiveData;
+import com.example.passwordsaver.constants.AppConstants;
 import com.example.passwordsaver.models.FailureResponse;
 import com.example.passwordsaver.repo.LoginRepo;
 
@@ -22,8 +23,12 @@ public class DataManager {
     private static DataManager instance;
     public Context context;
 
+    private PreferenceManager preferenceManager;
+
     public DataManager(Context context) {
+
         this.context = context;
+        preferenceManager = PreferenceManager.getInstance(context);
     }
 
     public static DataManager   getInstance() {
@@ -80,5 +85,21 @@ public class DataManager {
 
     public  Call<RegisterResponse> hitRegisterApi(RegisterRequest registerRequest){
         return  apiManager.hitRegisterApi(registerRequest);
+    }
+
+    public void setAccessToken(String access_token){
+        preferenceManager.putString(AppConstants.ACCESS_TOKEN_KEY,access_token);
+    }
+
+    public String getAccessToken(){
+        return preferenceManager.getString(AppConstants.ACCESS_TOKEN_KEY);
+    }
+
+    public  void setRefreshToken(String refresh_token){
+        preferenceManager.putString(AppConstants.REFRESH_TOKEN_KEY,refresh_token);
+    }
+
+    public void getRefreshToken(){
+        preferenceManager.getString(AppConstants.REFRESH_TOKEN_KEY);
     }
 }
