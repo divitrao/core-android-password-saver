@@ -6,6 +6,7 @@ import com.example.passwordsaver.apiRequest.LoginRequest;
 import com.example.passwordsaver.apiRequest.RegisterRequest;
 import com.example.passwordsaver.apiResponse.LoginResponse;
 import com.example.passwordsaver.apiResponse.RegisterResponse;
+import com.example.passwordsaver.apiResponse.passwordList.PasswordListResponse;
 import com.example.passwordsaver.constants.AppConstants;
 import com.example.passwordsaver.data.DataManager;
 
@@ -75,5 +76,9 @@ public class ApiManager {
 
     public  Call<RegisterResponse> hitRegisterApi(RegisterRequest registerRequest){
         return  apiClient.hitRegister(registerRequest);
+    }
+
+    public Call<PasswordListResponse> hitPasswordList(){
+        return apiAuthenticatedClient.hitPasswordList();
     }
 }

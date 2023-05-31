@@ -9,6 +9,7 @@ import com.example.passwordsaver.apiRequest.LoginRequest;
 import com.example.passwordsaver.apiRequest.RegisterRequest;
 import com.example.passwordsaver.apiResponse.LoginResponse;
 import com.example.passwordsaver.apiResponse.RegisterResponse;
+import com.example.passwordsaver.apiResponse.passwordList.PasswordListResponse;
 import com.example.passwordsaver.base.RichMediatorLiveData;
 import com.example.passwordsaver.constants.AppConstants;
 import com.example.passwordsaver.models.FailureResponse;
@@ -101,5 +102,9 @@ public class DataManager {
 
     public void getRefreshToken(){
         preferenceManager.getString(AppConstants.REFRESH_TOKEN_KEY);
+    }
+
+    public Call<PasswordListResponse> hitPasswordList(){
+        return apiManager.hitPasswordList();
     }
 }
