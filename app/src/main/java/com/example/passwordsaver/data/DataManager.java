@@ -5,10 +5,13 @@ import android.content.Context;
 import androidx.lifecycle.Observer;
 
 import com.example.passwordsaver.api.ApiManager;
+import com.example.passwordsaver.apiRequest.CreatePasswordRequest;
 import com.example.passwordsaver.apiRequest.LoginRequest;
 import com.example.passwordsaver.apiRequest.RegisterRequest;
 import com.example.passwordsaver.apiResponse.LoginResponse;
 import com.example.passwordsaver.apiResponse.RegisterResponse;
+import com.example.passwordsaver.apiResponse.WebsiteLogo.WebsiteLogoresponse;
+import com.example.passwordsaver.apiResponse.createPassword.CreatePasswordResponse;
 import com.example.passwordsaver.apiResponse.passwordList.PasswordListResponse;
 import com.example.passwordsaver.base.RichMediatorLiveData;
 import com.example.passwordsaver.constants.AppConstants;
@@ -106,5 +109,11 @@ public class DataManager {
 
     public Call<PasswordListResponse> hitPasswordList(){
         return apiManager.hitPasswordList();
+    }
+
+    public  Call<WebsiteLogoresponse> fetchLogo(String url){return apiManager.fetchLogo(url);}
+
+    public Call<CreatePasswordResponse> hitCreatePassword(CreatePasswordRequest createPasswordRequest){
+        return apiManager.hitCreatePassword(createPasswordRequest);
     }
 }

@@ -15,6 +15,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".uiActivity.CreatePasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".uiActivity.PasswordList"
             android:exported="false" />
         <activity

@@ -2,10 +2,13 @@ package com.example.passwordsaver.api;
 
 
 import com.example.passwordsaver.BuildConfig;
+import com.example.passwordsaver.apiRequest.CreatePasswordRequest;
 import com.example.passwordsaver.apiRequest.LoginRequest;
 import com.example.passwordsaver.apiRequest.RegisterRequest;
 import com.example.passwordsaver.apiResponse.LoginResponse;
 import com.example.passwordsaver.apiResponse.RegisterResponse;
+import com.example.passwordsaver.apiResponse.WebsiteLogo.WebsiteLogoresponse;
+import com.example.passwordsaver.apiResponse.createPassword.CreatePasswordResponse;
 import com.example.passwordsaver.apiResponse.passwordList.PasswordListResponse;
 import com.example.passwordsaver.constants.AppConstants;
 import com.example.passwordsaver.data.DataManager;
@@ -28,6 +31,8 @@ public class ApiManager {
 
     private ApiInterface apiAuthenticatedClient;
 
+    private  ApiInterface apiClientForLogo;
+
     public static ApiManager getInstance() {
         return instance;
     }
@@ -36,11 +41,20 @@ public class ApiManager {
 
         apiClient = getRetrofitService();
         apiAuthenticatedClient = getAuthenticatedretrofitService();
+        apiClientForLogo = getRetrofitServiceForLogo();
     }
 
     private ApiInterface getRetrofitService(){
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
                 .baseUrl(BuildConfig.API_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retorfit = retrofitBuilder.build();
+        return retorfit.create(ApiInterface.class);
+    }
+
+    private  ApiInterface getRetrofitServiceForLogo(){
+        Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
+                .baseUrl("https://besticon-demo.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retorfit = retrofitBuilder.build();
         return retorfit.create(ApiInterface.class);
@@ -81,4 +95,12 @@ public class ApiManager {
     public Call<PasswordListResponse> hitPasswordList(){
         return apiAuthenticatedClient.hitPasswordList();
     }
+    public Call<WebsiteLogoresponse> fetchLogo(String url){
+        return apiClientForLogo.hitFetchLogo(url);
+    }
+
+    public Call<CreatePasswordResponse> hitCreatePassword(CreatePasswordRequest createPasswordRequest){
+        return apiAuthenticatedClient.hitCreatePassword(createPasswordRequest);
+    }
+
 }

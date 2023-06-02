@@ -7,4 +7,7 @@
     <string name="press_register">Don\'t have an account ? click here to register</string>
     <string name="register">REGISTER</string>
     <string name="re_enter_password">Re Enter Password</string>
+    <string name="create_password">CREATE PASSWORD</string>
+    <string name="enter_website">Enter Website</string>
+    <string name="create_password_button">CREATE</string>
 </resources>

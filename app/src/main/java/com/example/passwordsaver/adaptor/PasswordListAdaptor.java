@@ -12,12 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.passwordsaver.R;
 import com.example.passwordsaver.apiResponse.passwordList.CredentialList;
 import com.example.passwordsaver.databinding.PasswordListRecyclerBinding;
+import com.example.passwordsaver.repo.WebsiteLogoRepo;
 
 import java.util.ArrayList;
 
 public class PasswordListAdaptor extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     Context context;
+    private WebsiteLogoRepo websiteLogoRepo = new WebsiteLogoRepo();
 
     ArrayList<CredentialList> credentialLists;
     public PasswordListAdaptor(Context context, ArrayList<CredentialList> credentialLists) {
@@ -59,6 +61,7 @@ public class PasswordListAdaptor extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public  void bind(CredentialList obj){
             passwordListRecyclerBinding.websiteName.setText(obj.getWebsite());
+            websiteLogoRepo.fetchLogo(obj.getWebsite(),passwordListRecyclerBinding.webisteImage,context);
             passwordListRecyclerBinding.webisteImage.setImageResource(R.drawable.add_pass_button);
         }
     }

@@ -33,7 +33,6 @@ public class RegisterActivity extends BaseActivity {
         binding.buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("rrrr", String.valueOf(binding.usernameTextfield.getText()));
                 RegisterRequest registerRequest = new RegisterRequest();
                 registerRequest.setUsername(String.valueOf(binding.usernameTextfield.getText()));
                 registerRequest.setPassword(String.valueOf(binding.editTextTextPassword.getText()));
