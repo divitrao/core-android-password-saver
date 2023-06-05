@@ -10,4 +10,8 @@
     <string name="create_password">CREATE PASSWORD</string>
     <string name="enter_website">Enter Website</string>
     <string name="create_password_button">CREATE</string>
+    <string name="credential_detail">Credential Details</string>
+    <string name="username_detail">USERNAME</string>
+    <string name="password_detail">PASSWORD</string>
+    <string name="webiste_detail">WEBSITE</string>
 </resources>

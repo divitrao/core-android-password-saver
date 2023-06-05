@@ -20,14 +20,16 @@ import com.example.passwordsaver.apiResponse.passwordList.CredentialList;
 import com.example.passwordsaver.apiResponse.passwordList.PasswordListResponse;
 import com.example.passwordsaver.base.BaseActivity;
 import com.example.passwordsaver.databinding.ActivityPasswordListBinding;
+import com.example.passwordsaver.listeners.RecyclerViewClickListener;
 import com.example.passwordsaver.models.FailureResponse;
 import com.example.passwordsaver.repo.PasswordListRepo;
 import com.example.passwordsaver.viewModels.CreatePassword.CreatePasswordViewModel;
 import com.example.passwordsaver.viewModels.PasswordList.PasswordListViewModel;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
-public class PasswordList extends BaseActivity {
+public class PasswordList extends BaseActivity implements RecyclerViewClickListener {
 
     private PasswordListViewModel passwordListViewModel;
 
@@ -90,7 +92,7 @@ public class PasswordList extends BaseActivity {
     }
 
     public void setAdaptor(){
-        passwordListAdaptor = new PasswordListAdaptor(this,password_list);
+        passwordListAdaptor = new PasswordListAdaptor(this,password_list,this);
         Log.d("rweqweqwewq", String.valueOf(binding));
         binding.recyclerPasswordList.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         binding.recyclerPasswordList.setAdapter(passwordListAdaptor);
@@ -108,5 +110,18 @@ public class PasswordList extends BaseActivity {
         passwordListViewModel.hitPasswordList();
         //When BACK BUTTON is pressed, the activity on the stack is restarted
         //Do what you want on the refresh procedure here
+    }
+
+    @Override
+    public void onClick(Object obj1, Object Objposition) {
+        int position = (Integer) Objposition;
+        CredentialList credentialList = new CredentialList();
+        Gson gson = new Gson();
+        credentialList = password_list.get(position);
+        String credential_object = gson.toJson(credentialList);
+        Intent intent = new Intent(PasswordList.this,CredentialDetailActivity.class);
+        intent.putExtra("credential_detail",credential_object);
+//        Toast.makeText(this,password_list.get(position).getCredential(),Toast.LENGTH_LONG).show();
+        startActivity(intent);
     }
 }

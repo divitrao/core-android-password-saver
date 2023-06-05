@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.passwordsaver.R;
 import com.example.passwordsaver.apiResponse.passwordList.CredentialList;
 import com.example.passwordsaver.databinding.PasswordListRecyclerBinding;
+import com.example.passwordsaver.listeners.RecyclerViewClickListener;
 import com.example.passwordsaver.repo.WebsiteLogoRepo;
 
 import java.util.ArrayList;
@@ -19,12 +20,15 @@ import java.util.ArrayList;
 public class PasswordListAdaptor extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     Context context;
+
+    private RecyclerViewClickListener recyclerViewClickListener;
     private WebsiteLogoRepo websiteLogoRepo = new WebsiteLogoRepo();
 
     ArrayList<CredentialList> credentialLists;
-    public PasswordListAdaptor(Context context, ArrayList<CredentialList> credentialLists) {
+    public PasswordListAdaptor(Context context, ArrayList<CredentialList> credentialLists, RecyclerViewClickListener click_listener) {
         this.context = context;
         this.credentialLists = credentialLists;
+        this.recyclerViewClickListener = click_listener;
     }
 
     @NonNull
@@ -59,10 +63,18 @@ public class PasswordListAdaptor extends RecyclerView.Adapter<RecyclerView.ViewH
             this.passwordListRecyclerBinding = passwordListRecyclerBinding;
         }
 
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recyclerViewClickListener.onClick(PasswordListAdaptor.this,getAdapterPosition());
+            }
+        };
+
         public  void bind(CredentialList obj){
             passwordListRecyclerBinding.websiteName.setText(obj.getWebsite());
             websiteLogoRepo.fetchLogo(obj.getWebsite(),passwordListRecyclerBinding.webisteImage,context);
             passwordListRecyclerBinding.webisteImage.setImageResource(R.drawable.add_pass_button);
+            passwordListRecyclerBinding.mainContainer.setOnClickListener(listener);
         }
     }
 }
